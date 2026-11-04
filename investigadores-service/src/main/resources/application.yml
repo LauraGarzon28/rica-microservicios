@@ -11,6 +11,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/rica
     username: rica
     password: rica
+  jpa:
+    show-sql: false
+  kafka:
+    bootstrap-servers: localhost:9092
   
 eureka:
   instance:
