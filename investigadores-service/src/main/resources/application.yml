@@ -11,3 +11,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/rica
     username: rica
     password: rica
+  
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
