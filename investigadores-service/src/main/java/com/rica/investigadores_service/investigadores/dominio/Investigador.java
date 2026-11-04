@@ -1,6 +1,15 @@
 package com.rica.investigadores_service.investigadores.dominio;
 
-import jakarta.persistence.*;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "investigadores")
@@ -14,17 +23,21 @@ public class Investigador {
     private String nombreCompleto;
 
     @Embedded
-    @AttributeOverride(name = "valor",
-            column = @Column(name = "correo_institucional", nullable = false, unique = true, length = 150))
+    @AttributeOverride(name = "valor", column = @Column(name = "correo_institucional", nullable = false, unique = true, length = 150))
     private CorreoInstitucional correoInstitucional;
 
     @Column(name = "grupo_investigacion", length = 150)
     private String grupoInvestigacion;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private EstadoInvestigador estado = EstadoInvestigador.ACTIVO;
+
     public Investigador() {
     }
 
-    public Investigador(Long id, String nombreCompleto, CorreoInstitucional correoInstitucional, String grupoInvestigacion) {
+    public Investigador(Long id, String nombreCompleto, CorreoInstitucional correoInstitucional,
+            String grupoInvestigacion) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
         this.correoInstitucional = correoInstitucional;
@@ -64,5 +77,17 @@ public class Investigador {
 
     public void setCorreoInstitucional(CorreoInstitucional correoInstitucional) {
         this.correoInstitucional = correoInstitucional;
+    }
+
+    public EstadoInvestigador getEstado() {
+        return estado;
+    }
+
+    public boolean estaEnEliminacion() {
+        return estado == EstadoInvestigador.EN_ELIMINACION;
+    }
+
+    public void marcarEnEliminacion() {
+        this.estado = EstadoInvestigador.EN_ELIMINACION;
     }
 }

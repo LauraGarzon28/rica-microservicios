@@ -32,4 +32,16 @@ class RepositorioInvestigadoresFalso implements RepositorioInvestigadores {
         almacen.put(investigador.getId(), investigador);
         return investigador;
     }
+
+    @Override
+    public Optional<Investigador> buscarPorCorreo(String correoInstitucional) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buscarPorCorreo'");
+    }
+
+    @Override
+    public void eliminar(Investigador investigador) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eliminar'");
+    }
 }

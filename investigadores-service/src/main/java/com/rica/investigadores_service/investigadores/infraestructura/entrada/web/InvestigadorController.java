@@ -35,13 +35,18 @@ public class InvestigadorController {
     @PostMapping
     public ResponseEntity<InvestigadorResponse> registrar(@Valid @RequestBody InvestigadorRequest request) {
         Investigador guardado = investigadorService.registrar(
-            request.getNombreCompleto(),
-            request.getCorreoInstitucional(),
-            request.getGrupoInvestigacion()
-        );
+                request.getNombreCompleto(),
+                request.getCorreoInstitucional(),
+                request.getGrupoInvestigacion());
         InvestigadorResponse response = InvestigadorMapper.aResponse(guardado);
         return ResponseEntity
                 .created(URI.create("/api/investigadores/" + guardado.getId()))
                 .body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+        investigadorService.iniciarEliminacion(id);
+        return ResponseEntity.accepted().build();
     }
 }

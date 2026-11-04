@@ -39,7 +39,7 @@ public class InvestigadorService implements InvestigadorUseCase {
     public Investigador registrar(String nombreCompleto, String correoInstitucional, String grupoInvestigacion) {
         Investigador investigador = investigadorFactory.crear(nombreCompleto, correoInstitucional, grupoInvestigacion);
         Investigador guardado = repositorioInvestigadores.guardar(investigador);
-        
+
         publicadorEventos.publicar(
                 "investigadores.registrados",
                 correoInstitucional,
@@ -48,4 +48,30 @@ public class InvestigadorService implements InvestigadorUseCase {
                         "nombreCompleto", nombreCompleto));
         return guardado;
     }
+
+    @Override
+    @Transactional
+    public void iniciarEliminacion(Long id) {
+        Investigador investigador = buscarPorId(id);
+        if (investigador.estaEnEliminacion()) {
+            return; 
+        }
+        investigador.marcarEnEliminacion();
+        repositorioInvestigadores.guardar(investigador);
+
+        String correo = investigador.getCorreoInstitucional().valor();
+        publicadorEventos.publicar(
+                "investigadores.en-eliminacion",
+                correo,
+                Map.of("correoInstitucional", correo));
+    }
+
+    @Override
+    @Transactional
+    public void confirmarEliminacion(String correoInstitucional) {
+        repositorioInvestigadores.buscarPorCorreo(correoInstitucional)
+                .filter(Investigador::estaEnEliminacion)
+                .ifPresent(repositorioInvestigadores::eliminar);
+    }
+
 }
