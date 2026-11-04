@@ -1,7 +1,10 @@
-package com.rica.publicaciones_service.publicaciones;
+package com.rica.publicaciones_service.publicaciones.infraestructura.entrada.web;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.rica.publicaciones_service.publicaciones.aplicacion.PublicacionService;
+import com.rica.publicaciones_service.publicaciones.dominio.Publicacion;
 
 import jakarta.validation.Valid;
 

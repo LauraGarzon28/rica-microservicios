@@ -1,6 +1,8 @@
-package com.rica.publicaciones_service.publicaciones;
+package com.rica.publicaciones_service.publicaciones.dominio;
 
 import org.springframework.stereotype.Service;
+
+import com.rica.publicaciones_service.publicaciones.infraestructura.salida.persistencia.PublicacionRepository;
 
 @Service
 public class LimitePublicacionesAnualesService {

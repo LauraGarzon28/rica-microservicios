@@ -1,4 +1,6 @@
-package com.rica.publicaciones_service.publicaciones;
+package com.rica.publicaciones_service.publicaciones.infraestructura.entrada.web;
+
+import com.rica.publicaciones_service.publicaciones.dominio.Publicacion;
 
 public class PublicacionMapper {
 
