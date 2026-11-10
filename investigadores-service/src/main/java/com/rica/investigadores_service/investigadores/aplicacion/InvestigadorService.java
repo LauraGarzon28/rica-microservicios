@@ -54,7 +54,7 @@ public class InvestigadorService implements InvestigadorUseCase {
     public void iniciarEliminacion(Long id) {
         Investigador investigador = buscarPorId(id);
         if (investigador.estaEnEliminacion()) {
-            return; 
+            return;
         }
         investigador.marcarEnEliminacion();
         repositorioInvestigadores.guardar(investigador);
@@ -71,7 +71,13 @@ public class InvestigadorService implements InvestigadorUseCase {
     public void confirmarEliminacion(String correoInstitucional) {
         repositorioInvestigadores.buscarPorCorreo(correoInstitucional)
                 .filter(Investigador::estaEnEliminacion)
-                .ifPresent(repositorioInvestigadores::eliminar);
+                .ifPresent(investigador -> {
+                    repositorioInvestigadores.eliminar(investigador);
+                    publicadorEventos.publicar(
+                            "investigadores.eliminados",
+                            correoInstitucional,
+                            Map.of("correoInstitucional", correoInstitucional));
+                });
     }
 
 }

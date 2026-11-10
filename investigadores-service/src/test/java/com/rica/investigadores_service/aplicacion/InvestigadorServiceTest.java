@@ -21,7 +21,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 @ExtendWith(MockitoExtension.class)
 public class InvestigadorServiceTest {
     @Mock
@@ -38,7 +37,8 @@ public class InvestigadorServiceTest {
 
     @Test
     void buscarPorIdDevuelveElInvestigadorCuandoExiste() {
-        Investigador investigador = new Investigador(1L, "Ana Torres", new CorreoInstitucional("ana.torres@uptc.edu.co"), "GIT-UPTC");
+        Investigador investigador = new Investigador(1L, "Ana Torres",
+                new CorreoInstitucional("ana.torres@uptc.edu.co"), "GIT-UPTC");
         when(repositorioInvestigadores.buscarPorId(1L)).thenReturn(Optional.of(investigador));
 
         Investigador resultado = investigadorService.buscarPorId(1L);
@@ -58,14 +58,30 @@ public class InvestigadorServiceTest {
     @Test
     void registrarRechazaCorreoInstitucionalDuplicado() {
         when(investigadorFactory.crear("Carlos Ruiz", "carlos.ruiz@uptc.edu.co", "GIT-UPTC"))
-            .thenThrow(new CorreoDuplicadoException("Ya existe un investigador registrado"));
+                .thenThrow(new CorreoDuplicadoException("Ya existe un investigador registrado"));
 
         assertThatThrownBy(() -> investigadorService.registrar(
-            "Carlos Ruiz", "carlos.ruiz@uptc.edu.co", "GIT-UPTC"))
+                "Carlos Ruiz", "carlos.ruiz@uptc.edu.co", "GIT-UPTC"))
                 .isInstanceOf(CorreoDuplicadoException.class);
 
         verify(investigadorFactory).crear("Carlos Ruiz", "carlos.ruiz@uptc.edu.co", "GIT-UPTC");
     }
 
+    @Test
+    void confirmarEliminacionBorraAlInvestigadorYPublicaElEventoEliminado() {
+        Investigador enEliminacion = new Investigador(1L, "Ana Torres",
+                new CorreoInstitucional("ana.torres@uptc.edu.co"), "GIT-UPTC");
+        enEliminacion.marcarEnEliminacion();
+        when(repositorioInvestigadores.buscarPorCorreo("ana.torres@uptc.edu.co"))
+                .thenReturn(Optional.of(enEliminacion));
+
+        investigadorService.confirmarEliminacion("ana.torres@uptc.edu.co");
+
+        verify(repositorioInvestigadores).eliminar(enEliminacion);
+        verify(publicadorEventos).publicar(
+                "investigadores.eliminados",
+                "ana.torres@uptc.edu.co",
+                java.util.Map.of("correoInstitucional", "ana.torres@uptc.edu.co"));
+    }
 
 }
