@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.rica.publicaciones_service.compartido.LimiteAnualExcedidoException;
 import com.rica.publicaciones_service.compartido.RecursoNoEncontradoException;
+import com.rica.publicaciones_service.publicaciones.PublicadorEventosPublicaciones;
 import com.rica.publicaciones_service.publicaciones.VerificadorInvestigador;
 import com.rica.publicaciones_service.publicaciones.dominio.LimitePublicacionesAnualesService;
 import com.rica.publicaciones_service.publicaciones.dominio.Publicacion;
@@ -13,16 +14,19 @@ import java.util.List;
 
 @Service
 public class PublicacionService {
+
     private final PublicacionRepository publicacionRepository;
     private final VerificadorInvestigador verificadorInvestigador;
     private final LimitePublicacionesAnualesService limitePublicacionesAnualesService;
+    private final PublicadorEventosPublicaciones publicadorEventos;
 
     public PublicacionService(PublicacionRepository publicacionRepository,
             VerificadorInvestigador verificadorInvestigador,
-            LimitePublicacionesAnualesService limitePublicacionesAnualesService) {
+            LimitePublicacionesAnualesService limitePublicacionesAnualesService, PublicadorEventosPublicaciones publicadorEventos) {
         this.publicacionRepository = publicacionRepository;
         this.verificadorInvestigador = verificadorInvestigador;
         this.limitePublicacionesAnualesService = limitePublicacionesAnualesService;
+        this.publicadorEventos = publicadorEventos;
     }
 
     public Publicacion registrar(Publicacion publicacion) {
@@ -30,14 +34,14 @@ public class PublicacionService {
             throw new RecursoNoEncontradoException(
                     "No existe un investigador con correo " + publicacion.getInvestigadorCorreo());
         }
-
-        if (!limitePublicacionesAnualesService.puedeRegistrar(publicacion.getInvestigadorCorreo(), publicacion)) {
+        if (!limitePublicacionesAnualesService.puedeRegistrar(publicacion.getInvestigadorCorreo(), publicacion.getAnio())) {
             throw new LimiteAnualExcedidoException(
-                    "El investigador ha superado el límite máximo de publicaciones para el año "
-                            + publicacion.getAnio());
+                    "El investigador " + publicacion.getInvestigadorCorreo()
+                            + " ya alcanzó el máximo de publicaciones registradas para " + publicacion.getAnio());
         }
-
-        return publicacionRepository.save(publicacion);
+        Publicacion guardada = publicacionRepository.save(publicacion);
+        publicadorEventos.publicacionRegistrada(guardada);
+        return guardada;
     }
 
     public List<Publicacion> listarPorInvestigador(String investigadorCorreo) {
@@ -49,4 +53,5 @@ public class PublicacionService {
                 .orElseThrow(() -> new RecursoNoEncontradoException(
                         "No existe una publicación con id " + id));
     }
+
 }
