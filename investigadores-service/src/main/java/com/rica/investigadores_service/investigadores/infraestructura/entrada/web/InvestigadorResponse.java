@@ -6,10 +6,10 @@ public class InvestigadorResponse {
     private String nombreCompleto;
     private String correoInstitucional;
 
-    public InvestigadorResponse(Long id, String nombreCompleto, String grupoInvestigacion) {
+    public InvestigadorResponse(Long id, String nombreCompleto, String correoInstitucional) {
         this.id = id;
         this.nombreCompleto = nombreCompleto;
-        this.correoInstitucional = grupoInvestigacion;
+        this.correoInstitucional = correoInstitucional;
     }
 
     public Long getId() {
