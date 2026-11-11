@@ -15,7 +15,7 @@ class FichaInvestigadorTest {
         FichaInvestigador ficha = FichaInvestigador.nueva("ana.torres@uptc.edu.co");
 
         ficha.agregarPublicacion(publicacion("p1"));
-        ficha.agregarPublicacion(publicacion("p4556556"));
+        ficha.agregarPublicacion(publicacion("p2"));
 
         assertThat(ficha.getTotalPublicaciones()).isEqualTo(2);
         boolean primera = ficha.agregarPublicacion(publicacion("p1"));
