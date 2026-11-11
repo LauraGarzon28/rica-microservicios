@@ -1,4 +1,4 @@
-package com.rica.investigadores_service.investigadores.aplicacion;
+package com.rica.investigadores_service.investigadores.infraestructura.entrada.eventos;
 
 import com.rica.investigadores_service.investigadores.dominio.InvestigadorRegistrado;
 

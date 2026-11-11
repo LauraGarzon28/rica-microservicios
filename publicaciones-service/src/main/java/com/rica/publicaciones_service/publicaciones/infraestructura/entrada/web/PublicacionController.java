@@ -3,8 +3,8 @@ package com.rica.publicaciones_service.publicaciones.infraestructura.entrada.web
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rica.publicaciones_service.publicaciones.aplicacion.PublicacionService;
 import com.rica.publicaciones_service.publicaciones.dominio.Publicacion;
+import com.rica.publicaciones_service.publicaciones.puertos.entrada.PublicacionUseCase;
 
 import jakarta.validation.Valid;
 
@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping ("/api/publicaciones")
 public class PublicacionController {
     
-    private final PublicacionService publicacionService;
+    private final PublicacionUseCase publicacionService;
     
-    public PublicacionController(PublicacionService publicacionService) {
+    public PublicacionController(PublicacionUseCase publicacionService) {
         this.publicacionService = publicacionService;
     }
 

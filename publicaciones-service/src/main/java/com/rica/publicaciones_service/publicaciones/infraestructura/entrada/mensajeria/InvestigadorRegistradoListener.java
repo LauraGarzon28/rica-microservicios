@@ -1,4 +1,4 @@
-package com.rica.publicaciones_service.publicaciones;
+package com.rica.publicaciones_service.publicaciones.infraestructura.entrada.mensajeria;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,7 @@
 package com.rica.investigadores_service.investigadores.infraestructura.entrada.web;
 
-import com.rica.investigadores_service.investigadores.aplicacion.InvestigadorUseCase;
 import com.rica.investigadores_service.investigadores.dominio.Investigador;
+import com.rica.investigadores_service.investigadores.puertos.entrada.InvestigadorUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

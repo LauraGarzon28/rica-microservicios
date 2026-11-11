@@ -1,6 +1,6 @@
 package com.rica.investigadores_service.investigadores.infraestructura.salida.mensajeria;
 
-import com.rica.investigadores_service.investigadores.aplicacion.PublicadorEventos;
+import com.rica.investigadores_service.investigadores.puertos.salida.PublicadorEventos;
 import org.springframework.stereotype.Component;
 import tools.jackson.databind.ObjectMapper;
 

@@ -1,4 +1,4 @@
-package com.rica.investigadores_service.investigadores.aplicacion;
+package com.rica.investigadores_service.investigadores.puertos.salida;
 
 import java.util.Map;
 

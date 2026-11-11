@@ -1,6 +1,8 @@
-package com.rica.publicaciones_service.publicaciones;
+package com.rica.publicaciones_service.publicaciones.infraestructura.salida.grpc;
 
 import com.rica.publicacionesservice.grpc.InvestigadorGrpcGrpc.InvestigadorGrpcBlockingStub;
+import com.rica.publicaciones_service.compartido.ServicioNoDisponibleException;
+import com.rica.publicaciones_service.publicaciones.puertos.salida.VerificadorInvestigadorPort;
 import com.rica.publicacionesservice.grpc.InvestigadorRequest;
 import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
@@ -14,7 +16,7 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class VerificadorInvestigadorGrpc implements VerificadorInvestigador {
+public class VerificadorInvestigadorGrpc implements VerificadorInvestigadorPort {
 
     private static final Logger log = LoggerFactory.getLogger(VerificadorInvestigadorGrpc.class);
 
