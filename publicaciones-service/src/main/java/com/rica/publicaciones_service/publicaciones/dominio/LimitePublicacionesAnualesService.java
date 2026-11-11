@@ -1,10 +1,7 @@
 package com.rica.publicaciones_service.publicaciones.dominio;
 
-import org.springframework.stereotype.Service;
-
 import com.rica.publicaciones_service.publicaciones.puertos.salida.PublicacionRepositoryPort;
 
-@Service
 public class LimitePublicacionesAnualesService {
 
     private static final int MAXIMO_POR_ANIO = 5;
