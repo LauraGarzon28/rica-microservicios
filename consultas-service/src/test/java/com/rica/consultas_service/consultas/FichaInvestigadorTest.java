@@ -21,6 +21,18 @@ class FichaInvestigadorTest {
     }
 
     @Test
+    void agregarLaMismaPublicacionDosVecesEsIdempotente() {
+        FichaInvestigador ficha = FichaInvestigador.nueva("ana.torres@uptc.edu.co");
+
+        boolean primera = ficha.agregarPublicacion(publicacion("p1"));
+        boolean repetida = ficha.agregarPublicacion(publicacion("p1"));
+
+        assertThat(primera).isTrue();
+        assertThat(repetida).isFalse();
+        assertThat(ficha.getTotalPublicaciones()).isEqualTo(1);
+    }
+
+    @Test
     void unaFichaNuevaEstaActivaYSinNombre() {
         FichaInvestigador ficha = FichaInvestigador.nueva("ana.torres@uptc.edu.co");
 
