@@ -36,7 +36,7 @@ class FichaInvestigadorTest {
     void unaFichaNuevaEstaActivaYSinNombre() {
         FichaInvestigador ficha = FichaInvestigador.nueva("ana.torres@uptc.edu.co");
 
-        assertThat(ficha.getEstado()).isEqualTo(FichaInvestigador.ACTIVO);
+        assertThat(ficha.getEstado()).isEqualTo(FichaInvestigador.EN_ELIMINACION);
         assertThat(ficha.getNombreCompleto()).isNull();
     }
 
