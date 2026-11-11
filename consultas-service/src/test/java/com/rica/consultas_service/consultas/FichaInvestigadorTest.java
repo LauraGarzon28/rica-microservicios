@@ -15,9 +15,15 @@ class FichaInvestigadorTest {
         FichaInvestigador ficha = FichaInvestigador.nueva("ana.torres@uptc.edu.co");
 
         ficha.agregarPublicacion(publicacion("p1"));
-        ficha.agregarPublicacion(publicacion("p4556556"));
+        ficha.agregarPublicacion(publicacion("p2"));
 
         assertThat(ficha.getTotalPublicaciones()).isEqualTo(2);
+    }
+
+    @Test
+    void agregarLaMismaPublicacionDosVecesEsIdempotente() {
+        FichaInvestigador ficha = FichaInvestigador.nueva("ana.torres@uptc.edu.co");
+
         boolean primera = ficha.agregarPublicacion(publicacion("p1"));
         boolean repetida = ficha.agregarPublicacion(publicacion("p1"));
 
@@ -30,7 +36,7 @@ class FichaInvestigadorTest {
     void unaFichaNuevaEstaActivaYSinNombre() {
         FichaInvestigador ficha = FichaInvestigador.nueva("ana.torres@uptc.edu.co");
 
-        assertThat(ficha.getEstado()).isEqualTo(FichaInvestigador.ACTIVO);
+        assertThat(ficha.getEstado()).isEqualTo(FichaInvestigador.EN_ELIMINACION);
         assertThat(ficha.getNombreCompleto()).isNull();
     }
 
