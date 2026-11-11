@@ -33,4 +33,24 @@ public class TopicosConfig {
         return TopicBuilder.name("publicaciones.registradas").partitions(1).replicas(1).build();
     }
 
+    @Bean
+    public NewTopic investigadoresRegistradosDlt() {
+        return TopicBuilder.name("investigadores.registrados.DLT").partitions(1).replicas(1).build();
+    }
+
+    @Bean
+    public NewTopic investigadoresEnEliminacionDlt() {
+        return TopicBuilder.name("investigadores.en-eliminacion.DLT").partitions(1).replicas(1).build();
+    }
+
+    @Bean
+    public NewTopic investigadoresEliminadosDlt() {
+        return TopicBuilder.name("investigadores.eliminados.DLT").partitions(1).replicas(1).build();
+    }
+
+    @Bean
+    public NewTopic publicacionesRegistradasDlt() {
+        return TopicBuilder.name("publicaciones.registradas.DLT").partitions(1).replicas(1).build();
+    }
+
 }
