@@ -2,13 +2,10 @@ package com.rica.publicaciones_service.publicaciones.infraestructura.salida.pers
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.rica.publicaciones_service.publicaciones.dominio.Publicacion;
-
 import java.util.List;
 
-public interface PublicacionRepository extends MongoRepository<Publicacion, String> {
+public interface PublicacionRepository extends MongoRepository<PublicacionDocument, String> {
 
-    List<Publicacion> findByInvestigadorCorreo(String investigadorCorreo);
+    List<PublicacionDocument> findByInvestigadorCorreo(String investigadorCorreo);
     long countByInvestigadorCorreoAndAnio(String investigadorCorreo, Integer anio);
-
 }

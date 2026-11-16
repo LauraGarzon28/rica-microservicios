@@ -1,10 +1,10 @@
-package com.rica.investigadores_service.investigadores.infraestructura.salida.mensajeria;
+package com.rica.investigadores_service.investigadores.infraestructura.entrada.mensajeria;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import com.rica.investigadores_service.investigadores.aplicacion.InvestigadorUseCase;
+import com.rica.investigadores_service.investigadores.puertos.entrada.InvestigadorUseCase;
 
 import tools.jackson.databind.ObjectMapper;
 

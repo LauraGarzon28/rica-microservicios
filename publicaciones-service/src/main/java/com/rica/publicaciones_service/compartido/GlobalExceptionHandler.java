@@ -10,8 +10,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.rica.publicaciones_service.publicaciones.ServicioNoDisponibleException;
-
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

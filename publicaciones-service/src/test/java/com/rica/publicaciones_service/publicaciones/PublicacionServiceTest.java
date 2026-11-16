@@ -9,7 +9,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.rica.publicaciones_service.publicaciones.aplicacion.PublicacionService;
 import com.rica.publicaciones_service.publicaciones.dominio.LimitePublicacionesAnualesService;
 import com.rica.publicaciones_service.publicaciones.dominio.Publicacion;
-import com.rica.publicaciones_service.publicaciones.infraestructura.salida.persistencia.PublicacionRepository;
+import com.rica.publicaciones_service.publicaciones.puertos.salida.PublicacionRepositoryPort;
+import com.rica.publicaciones_service.publicaciones.puertos.salida.PublicadorEventosPort;
+import com.rica.publicaciones_service.publicaciones.puertos.salida.VerificadorInvestigadorPort;
 
 import java.util.Map;
 
@@ -23,16 +25,16 @@ import static org.mockito.ArgumentMatchers.any;
 class PublicacionServiceTest {
 
     @Mock
-    private PublicacionRepository publicacionRepository;
+    private PublicacionRepositoryPort publicacionRepository;
 
     @Mock
-    private VerificadorInvestigador verificadorInvestigador;
+    private VerificadorInvestigadorPort verificadorInvestigador;
 
     @Mock
     private LimitePublicacionesAnualesService limitePublicacionesAnualesService;
 
     @Mock
-    private PublicadorEventosPublicaciones publicadorEventos;
+    private PublicadorEventosPort publicadorEventos;
 
     @InjectMocks
     private PublicacionService publicacionService;
@@ -47,7 +49,7 @@ class PublicacionServiceTest {
         Publicacion guardada = new Publicacion("abc123", "ana.torres@uptc.edu.co", "Arquitecturas evolutivas", "articulo", 2026, Map.of());
         when(verificadorInvestigador.existe("ana.torres@uptc.edu.co")).thenReturn(true);
         when(limitePublicacionesAnualesService.puedeRegistrar("ana.torres@uptc.edu.co", 2026)).thenReturn(true);
-        when(publicacionRepository.save(entrada)).thenReturn(guardada);
+        when(publicacionRepository.guardar(entrada)).thenReturn(guardada);
 
         Publicacion resultado = publicacionService.registrar(entrada);
 

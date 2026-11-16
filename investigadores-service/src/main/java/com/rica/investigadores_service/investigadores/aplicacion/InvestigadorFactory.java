@@ -4,6 +4,7 @@ import com.rica.investigadores_service.investigadores.dominio.Investigador;
 import com.rica.investigadores_service.investigadores.dominio.CorreoInstitucional;
 import com.rica.investigadores_service.investigadores.dominio.CorreoDuplicadoException;
 import com.rica.investigadores_service.investigadores.dominio.InvestigadorRegistrado;
+import com.rica.investigadores_service.investigadores.puertos.salida.RepositorioInvestigadores;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 

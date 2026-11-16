@@ -2,6 +2,9 @@ package com.rica.investigadores_service.investigadores.aplicacion;
 
 import com.rica.investigadores_service.compartido.RecursoNoEncontradoException;
 import com.rica.investigadores_service.investigadores.dominio.Investigador;
+import com.rica.investigadores_service.investigadores.puertos.entrada.InvestigadorUseCase;
+import com.rica.investigadores_service.investigadores.puertos.salida.PublicadorEventos;
+import com.rica.investigadores_service.investigadores.puertos.salida.RepositorioInvestigadores;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Map;

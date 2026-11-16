@@ -1,4 +1,4 @@
-package com.rica.publicaciones_service.publicaciones;
+package com.rica.publicaciones_service.compartido;
 
 public class ServicioNoDisponibleException extends RuntimeException {
 

@@ -3,7 +3,7 @@ package com.rica.investigadores_service.investigadores.infraestructura.entrada.g
 import org.springframework.stereotype.Service;
 
 import com.rica.investigadoresservice.grpc.InvestigadorGrpcGrpc;
-import com.rica.investigadores_service.investigadores.aplicacion.RepositorioInvestigadores;
+import com.rica.investigadores_service.investigadores.puertos.salida.RepositorioInvestigadores;
 import com.rica.investigadoresservice.grpc.InvestigadorRequest;
 import com.rica.investigadoresservice.grpc.InvestigadorResponse;
 
